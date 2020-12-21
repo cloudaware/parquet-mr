@@ -171,9 +171,7 @@ class ColumnChunkPageReadStore implements PageReadStore, DictionaryPageReadStore
   }
 
   void addColumn(ColumnDescriptor path, ColumnChunkPageReader reader) {
-    if (readers.put(path, reader) != null) {
-      throw new RuntimeException(path+ " was added twice");
-    }
+    readers.putIfAbsent(path, reader);
   }
 
 }
